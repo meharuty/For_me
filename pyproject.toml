@@ -1,0 +1,10 @@
+[project]
+name = "fly-in"
+version = "0.1.0"
+description = "Drone routing simulation (42 curriculum)"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
