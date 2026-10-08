@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by <login>.*
+*This project has been created as part of the 42 curriculum by <mehruty>.*
 
 # Fly-in
 
@@ -24,7 +24,6 @@ Requires Python 3.10+ (Tkinter only for `--gui`: `apt install python3-tk`).
 make install          # flake8, mypy, pytest
 make run MAP=maps/hard/03_ultimate_challenge.txt   # colored terminal replay
 make run-gui MAP=maps/hard/02_capacity_hell.txt    # Tkinter window
-make test             # unit tests (GUI tests skip without a display)
 make benchmark        # every reference map vs its optimum
 make lint             # flake8 + mypy (make lint-strict: mypy --strict)
 make debug            # run under pdb
