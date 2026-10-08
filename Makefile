@@ -1,25 +1,21 @@
-PYTHON ?= python3
-MAP ?= maps/hard/03_ultimate_challenge.txt
+MAP = maps/hard/03_ultimate_challenge.txt
 
 .PHONY: install run run-gui debug test benchmark clean lint lint-strict
 
 install:
-	$(PYTHON) -m pip install -r requirements.txt
+	python3 -m pip install -r requirements.txt
 
 run:
-	$(PYTHON) main.py $(MAP)
+	python3 main.py $(MAP)
 
 run-gui:
-	$(PYTHON) main.py $(MAP) --gui
+	python3 main.py $(MAP) --gui
 
 debug:
-	$(PYTHON) -m pdb main.py $(MAP) --plain
-
-test:
-	$(PYTHON) -m pytest -q
+	python3 -m pdb main.py $(MAP) --plain
 
 benchmark:
-	$(PYTHON) benchmark.py
+	python3 benchmark.py
 
 clean:
 	find . -type d \( -name __pycache__ -o -name .mypy_cache \
@@ -27,11 +23,11 @@ clean:
 	rm -f .coverage
 
 lint:
-	$(PYTHON) -m flake8 .
-	$(PYTHON) -m mypy . --warn-return-any --warn-unused-ignores \
+	python3 -m flake8 .
+	python3 -m mypy . --warn-return-any --warn-unused-ignores \
 		--ignore-missing-imports --disallow-untyped-defs \
 		--check-untyped-defs
 
 lint-strict:
-	$(PYTHON) -m flake8 .
-	$(PYTHON) -m mypy . --strict
+	python3 -m flake8 .
+	python3 -m mypy . --strict
