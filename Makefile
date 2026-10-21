@@ -1,11 +1,14 @@
 MAP = maps/hard/03_ultimate_challenge.txt
 
-.PHONY: install run debug benchmark clean lint lint-strict
+.PHONY: install run run-gui debug benchmark clean lint lint-strict
 
 install:
 	python3 -m pip install -r requirements.txt
 
 run:
+	python3 main.py $(MAP)
+
+run-gui:
 	python3 main.py $(MAP) --gui
 
 debug:

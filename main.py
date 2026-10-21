@@ -11,6 +11,7 @@ from src.simulation.replay import Replay
 from src.simulation.simulation import Simulation
 from src.simulation.state import SimulationState
 from src.visualization.gui import GraphicalVisualizer
+from src.visualization.terminal import TerminalVisualizer
 
 
 class FlyInApp:
@@ -38,7 +39,7 @@ class FlyInApp:
             )
 
     def _display(self, network: Network, replay: Replay) -> None:
-        """Print the visual replay and/or the official output."""
+        """Show the visual replay, then print the official output."""
         lines = replay.lines()
         if self.args.gui:
             print("\n".join(lines))
@@ -47,9 +48,12 @@ class FlyInApp:
                 trails=self.args.trails, heatmap=self.args.heatmap,
             ).run()
             return
-        if self.args.plain:
-            print("\n".join(lines))
-            return
+        if not (self.args.plain or self.args.no_visual):
+            TerminalVisualizer(
+                network, replay,
+                delay=self.args.delay, step=self.args.step,
+            ).run()
+        print("\n".join(lines))
 
     def run(self) -> int:
         """Run the whole pipeline; return a process exit code."""
