@@ -11,7 +11,6 @@ from src.simulation.replay import Replay
 from src.simulation.simulation import Simulation
 from src.simulation.state import SimulationState
 from src.visualization.gui import GraphicalVisualizer
-from src.visualization.terminal import TerminalVisualizer
 
 
 class FlyInApp:
@@ -51,13 +50,6 @@ class FlyInApp:
         if self.args.plain:
             print("\n".join(lines))
             return
-        if not self.args.no_visual:
-            viz = TerminalVisualizer(network, replay)
-            viz.show_legend()
-            viz.play(delay=self.args.delay, step=self.args.step)
-            viz.show_summary()
-            print("\n=== OUTPUT ===")
-        print("\n".join(lines))
 
     def run(self) -> int:
         """Run the whole pipeline; return a process exit code."""

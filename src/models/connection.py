@@ -1,6 +1,5 @@
 """Connection model."""
 from dataclasses import dataclass
-
 from .zone import Zone
 
 

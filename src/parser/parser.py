@@ -35,8 +35,6 @@ class MapParser:
         self._end: Zone | None = None
         self._connections: list[Connection] = []
 
-    # ---------- public API ----------
-
     def parse(self, file_path: str) -> Network:
         """Parse a map file and return a Network object.
 
@@ -75,8 +73,6 @@ class MapParser:
             end=self._end,
         )
 
-    # ---------- line dispatch ----------
-
     def _parse_line(self, line: str) -> None:
         """Dispatch a line to its corresponding parser."""
         if line.startswith("nb_drones:"):
@@ -99,8 +95,6 @@ class MapParser:
         self._nb_drones = CommonValidator.positive_integer(
             value, "nb_drones"
         )
-
-    # ---------- zones ----------
 
     def _parse_hub(self, line: str, kind: str) -> None:
         """Parse a start_hub, end_hub or regular hub line."""
@@ -152,8 +146,6 @@ class MapParser:
             max_drones=max_drones,
         )
 
-    # ---------- connections ----------
-
     def _parse_connection(self, line: str) -> Connection:
         """Parse a connection definition."""
         content = line.partition(":")[2].strip()
@@ -179,8 +171,6 @@ class MapParser:
             zone_b=self._zones[name_b],
             max_link_capacity=capacity,
         )
-
-    # ---------- metadata ----------
 
     @staticmethod
     def _extract_metadata(
