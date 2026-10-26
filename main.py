@@ -1,4 +1,3 @@
-"""Fly-in entry point: parse a map, route the drones, show the result."""
 import argparse
 import sys
 
@@ -74,7 +73,7 @@ class FlyInApp:
         except KeyboardInterrupt:
             print("\nInterrupted.", file=sys.stderr)
             return 130
-        except Exception as error:  # never crash during review
+        except Exception as error:
             print(f"Error: unexpected failure: {error}", file=sys.stderr)
             return 1
         return 0

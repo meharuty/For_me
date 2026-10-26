@@ -1,4 +1,3 @@
-"""Color helpers shared by the terminal and graphical views."""
 import colorsys
 import os
 import sys

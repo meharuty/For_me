@@ -1,6 +1,3 @@
-"""Parsing of optional ``[key=value ...]`` metadata blocks."""
-
-
 class MetadataParser:
     """Parse optional [key=value ...] metadata blocks."""
 

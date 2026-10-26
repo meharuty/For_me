@@ -29,8 +29,6 @@ class SimulationAnalytics:
         self._zone_max = max(self._zone_heat[-1].values(), default=0)
         self._link_max = max(self._link_heat[-1].values(), default=0)
 
-    # ---------- raw per-turn data ----------
-
     def anchor(self, index: int, drone_id: int) -> tuple[Zone, Zone | None]:
         """Where a drone is after ``index``: a zone, or a link in flight."""
         if index < 0:
@@ -80,8 +78,6 @@ class SimulationAnalytics:
             1 for z in self.frames[index].positions.values() if z == end
         )
 
-    # ---------- congestion heat ----------
-
     def _cumulate_zone(self) -> list[dict[str, int]]:
         """Cumulative drone-turns resting in each inner zone."""
         special = {self.network.start.name, self.network.end.name}
@@ -129,8 +125,6 @@ class SimulationAnalytics:
             key=lambda item: (-item[1], item[0]),
         )
         return ranked[:top]
-
-    # ---------- trails ----------
 
     def trail(self, drone_id: int, index: int) -> list[Zone]:
         """Zones a drone has visited up to ``index`` (no repeats in a row)."""

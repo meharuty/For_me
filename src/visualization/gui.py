@@ -1,4 +1,3 @@
-"""Animated tkinter view: zones, links, drones, trails and heatmap."""
 import math
 from typing import Any, Callable
 
@@ -10,8 +9,8 @@ from src.visualization.colors import ColorPalette
 
 try:
     import tkinter as tk
-except ImportError:  # tkinter is optional: only --gui needs it
-    tk = None  # type: ignore[assignment]
+except ImportError:
+    tk = None
 
 Point = tuple[float, float]
 
@@ -56,8 +55,6 @@ class Layout:
         fit_x = (width - 2 * margin) / max(span_x, 1)
         fit_y = (height - 2 * margin) / max(span_y, 1)
         base = max(min(fit_x, fit_y, 170.0), 1.0)
-        # Each axis may stretch up to 2.2x the uniform scale so a wide
-        # map still uses the canvas height, without distorting it badly.
         scale_x = max(min(fit_x, 170.0, base * 2.2), 1.0)
         scale_y = max(min(fit_y, 170.0, base * 2.2), 1.0)
         off_x = (width - span_x * scale_x) / 2
@@ -145,8 +142,6 @@ class GraphicalVisualizer:
         self.show_heat = tk.BooleanVar(master=self.root, value=heatmap)
         self.trail_drone = tk.StringVar(master=self.root, value="All")
         self._build_ui()
-
-    # ---------- UI construction ----------
 
     @staticmethod
     def _label(parent: "tk.Misc", **options: Any) -> "tk.Label":
@@ -271,8 +266,6 @@ class GraphicalVisualizer:
         self.speed.set(800)
         self.speed.pack(side="left")
 
-    # ---------- controls ----------
-
     def _goto(self, index: int, progress: float) -> None:
         """Jump to a frame index with a given animation progress."""
         self.index = max(-1, min(index, len(self.frames) - 1))
@@ -345,8 +338,6 @@ class GraphicalVisualizer:
         self.root.after(TICK_MS, self._tick)
         self.root.mainloop()
 
-    # ---------- geometry ----------
-
     def _anchor_point(self, anchor: tuple[Zone, Zone | None]) -> Point:
         """Pixel position of an anchor (links use their midpoint)."""
         ax, ay = self.layout.pos(anchor[0])
@@ -354,8 +345,6 @@ class GraphicalVisualizer:
             return ax, ay
         bx, by = self.layout.pos(anchor[1])
         return (ax + bx) / 2, (ay + by) / 2
-
-    # ---------- drawing ----------
 
     def _redraw(self) -> None:
         """Redraw the whole scene for the current index and progress."""
