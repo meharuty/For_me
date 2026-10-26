@@ -1,4 +1,3 @@
-"""Validation rules used by the map parser."""
 from src.models.connection import Connection
 from src.models.zone import Zone, ZoneType
 

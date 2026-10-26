@@ -276,8 +276,6 @@ class GraphicalVisualizer:
         self.speed.set(800)
         self.speed.pack(side="left")
 
-    # ---------- controls ----------
-
     def _goto(self, index: int, progress: float) -> None:
         """Jump to a frame index with a given animation progress."""
         self.index = max(-1, min(index, len(self.frames) - 1))

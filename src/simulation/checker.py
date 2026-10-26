@@ -1,4 +1,3 @@
-"""Independent verification of a simulation's official output."""
 from src.models.network import Network
 from src.models.zone import ZoneType
 

@@ -74,6 +74,9 @@ class FlyInApp:
         except KeyboardInterrupt:
             print("\nInterrupted.", file=sys.stderr)
             return 130
+        except Exception as error:  # never crash during review
+            print(f"Error: unexpected failure: {error}", file=sys.stderr)
+            return 1
         return 0
 
 

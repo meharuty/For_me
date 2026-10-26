@@ -1,4 +1,3 @@
-"""Map file parser."""
 from src.models.connection import Connection
 from src.models.network import Network
 from src.models.zone import Zone
@@ -75,6 +74,8 @@ class MapParser:
 
     def _parse_line(self, line: str) -> None:
         """Dispatch a line to its corresponding parser."""
+        if self._nb_drones is None and not line.startswith("nb_drones:"):
+            raise ValueError("The first definition must be nb_drones")
         if line.startswith("nb_drones:"):
             self._parse_nb_drones(line)
         elif line.startswith(_HUB_PREFIXES):

@@ -1,4 +1,3 @@
-"""Time-expanded planner producing conflict-free routes for each drone."""
 import heapq
 from dataclasses import dataclass
 

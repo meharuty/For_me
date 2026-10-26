@@ -1,4 +1,3 @@
-"""Simulation state."""
 from src.models.drone import Drone
 from src.models.zone import Zone
 

@@ -1,4 +1,3 @@
-"""Turn-by-turn simulation driven by a Scheduler."""
 from src.algorithms.scheduler import Scheduler
 from src.models.zone import Zone
 from src.simulation.movement import Movement

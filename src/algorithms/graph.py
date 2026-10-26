@@ -1,6 +1,4 @@
-"""Graph of zones built from a Network."""
 from collections import deque
-
 from src.models.network import Network
 from src.models.zone import Zone, ZoneType
 

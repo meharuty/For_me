@@ -1,4 +1,3 @@
-"""Scheduler: plans every drone, then replays the plan turn by turn."""
 from src.algorithms.planner import Leg, TimeExpandedPlanner
 from src.models.drone import Drone
 from src.models.network import Network

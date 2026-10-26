@@ -1,6 +1,6 @@
-MAP = maps/hard/03_ultimate_challenge.txt
+MAP ?= maps/hard/03_ultimate_challenge.txt
 
-.PHONY: install run run-gui debug benchmark clean lint lint-strict
+.PHONY: install run run-gui debug clean lint lint-strict
 
 install:
 	python3 -m pip install -r requirements.txt
@@ -13,9 +13,6 @@ run-gui:
 
 debug:
 	python3 -m pdb main.py $(MAP) --plain
-
-benchmark:
-	python3 benchmark.py
 
 clean:
 	find . -type d \( -name __pycache__ -o -name .mypy_cache \

@@ -1,4 +1,3 @@
-"""Colored terminal replay of a finished simulation."""
 import time
 
 from src.models.network import Network
