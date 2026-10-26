@@ -6,12 +6,7 @@ from src.models.network import Network
 from src.models.zone import Zone, ZoneType
 from src.simulation.replay import Replay
 from src.visualization.analytics import LinkKey, SimulationAnalytics
-from src.visualization.colors import (
-    color_to_hex,
-    drone_color,
-    heat_color,
-    text_color,
-)
+from src.visualization.colors import ColorPalette
 
 try:
     import tkinter as tk
@@ -241,7 +236,7 @@ class GraphicalVisualizer:
         for step in range(46):
             self.heat_bar.create_rectangle(
                 step * 5, 0, step * 5 + 5, 14, outline="",
-                fill=heat_color(step / 45),
+                fill=ColorPalette.heat(step / 45),
             )
 
     def _build_controls(self) -> None:
@@ -275,6 +270,8 @@ class GraphicalVisualizer:
         )
         self.speed.set(800)
         self.speed.pack(side="left")
+
+    # ---------- controls ----------
 
     def _goto(self, index: int, progress: float) -> None:
         """Jump to a frame index with a given animation progress."""
@@ -398,7 +395,7 @@ class GraphicalVisualizer:
             color = LINK_BUSY if used else LINK
             width = min(2 + conn.max_link_capacity, 7)
             if ratio > 0 and not used:
-                color, width = heat_color(ratio), width + 2
+                color, width = ColorPalette.heat(ratio), width + 2
             self.canvas.create_line(ax, ay, bx, by, fill=color, width=width)
             label = (
                 f"{used}/{conn.max_link_capacity}" if used
@@ -425,7 +422,7 @@ class GraphicalVisualizer:
                 px, py = self.layout.pos(zone)
                 coords += [px + shift, py + shift]
             self.canvas.create_line(
-                *coords, fill=drone_color(drone_id),
+                *coords, fill=ColorPalette.for_drone(drone_id),
                 width=3 if choice != "All" else 2, dash=(6, 3),
                 arrow="last", arrowshape=(9, 11, 4),
             )
@@ -437,7 +434,7 @@ class GraphicalVisualizer:
         x, y = self.layout.pos(zone)
         r = self.layout.radius
         halo_gap = max(4.0, r * 0.28)
-        fill = color_to_hex(zone.color)
+        fill = ColorPalette.from_name(zone.color)
         dash: tuple[int, ...] = ()
         outline, width = "#d9dee7", 2
         if zone.zone_type == ZoneType.PRIORITY:
@@ -455,7 +452,7 @@ class GraphicalVisualizer:
             )
         elif self.show_heat.get() and zone.zone_type != ZoneType.BLOCKED:
             ratio = heat.get(zone.name, 0.0)
-            halo = heat_color(ratio) if ratio > 0 else COLD
+            halo = ColorPalette.heat(ratio) if ratio > 0 else COLD
             self.canvas.create_oval(
                 x - r - halo_gap, y - r - halo_gap,
                 x + r + halo_gap, y + r + halo_gap,
@@ -480,7 +477,7 @@ class GraphicalVisualizer:
             else:
                 inner = f"{count}/{zone.max_drones}"
             self.canvas.create_text(
-                x, y, text=inner, fill=text_color(fill),
+                x, y, text=inner, fill=ColorPalette.text_on(fill),
                 font=("Helvetica", 10, "bold"),
             )
             if not (is_start or is_end) and count >= zone.max_drones:
@@ -507,13 +504,13 @@ class GraphicalVisualizer:
 
     def _draw_drone(self, drone_id: int, x: float, y: float) -> None:
         """Draw one drone dot with its id."""
-        color = drone_color(drone_id)
+        color = ColorPalette.for_drone(drone_id)
         r = self.layout.drone_radius
         self.canvas.create_oval(
             x - r, y - r, x + r, y + r, fill=color, outline="#111111",
         )
         self.canvas.create_text(
-            x, y, text=str(drone_id), fill=text_color(color),
+            x, y, text=str(drone_id), fill=ColorPalette.text_on(color),
             font=("Helvetica", 7, "bold"),
         )
 
